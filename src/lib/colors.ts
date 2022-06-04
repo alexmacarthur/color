@@ -1,9 +1,4 @@
-type colorTypes = "rgb" | "hex" | "hsl";
-
-interface Color {
-  value: string,
-  isValid: boolean
-};
+import type { Color } from "src/types";
 
 const getPathValue = (): string => {
   let value = window.location.pathname.replace(/^\//, "");
@@ -15,11 +10,14 @@ const getHashValue = (): string => {
   return window.location.hash;
 }
 
+export const validateColor = (colorValue: string): boolean =>
+  CSS.supports("color", colorValue);
+
 export const getColor = (givenValue: string = ""): Color => {
   let color = givenValue || getPathValue() || getHashValue();
 
   return {
     value: color,
-    isValid: CSS.supports("color", color),
+    isValid: validateColor(color),
   };
 }
