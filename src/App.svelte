@@ -3,15 +3,23 @@
   import { color as colorStore } from "./store";
   import Screen from "./components/Screen.svelte";
   import ColorForm from "./components/ColorForm.svelte";
+import { onMount } from "svelte";
+  let element;
 
   const pathColor = getColor();
 
   if (pathColor.value) {
     $colorStore = pathColor;
   }
+
+  colorStore.subscribe(value => {
+
+    // element.style.setProperty('--cme-color', value.value);
+    // console.log('value', value);
+  })
 </script>
 
-<main class="full">
+<main class="full" bind:this={element}>
   {#if $colorStore.value}
     <Screen />
   {:else}
@@ -20,44 +28,21 @@
 </main>
 
 <style global>
-  /*** The new CSS Reset - version 1.2.0 (last updated 23.7.2021) ***/
-
-  /* Remove all the styles of the "User-Agent-Stylesheet", except for the 'display' property */
-  *:where(:not(iframe, canvas, img, svg, video):not(svg *)) {
-    all: unset;
-    display: revert;
-  }
-
-  /* Preferred box-sizing value */
-  *,
-  *::before,
-  *::after {
+  html {
     box-sizing: border-box;
+    font-size: 16px;
   }
 
-  /*
-  Remove list styles (bullets/numbers)
-  in case you use it with normalize.css
-*/
-  ol,
-  ul {
-    list-style: none;
+  *, *:before, *:after {
+    box-sizing: inherit;
   }
 
-  /* For images to not be able to exceed their container */
-  img {
-    max-width: 100%;
+  body, h1, h2, h3, h4, h5, h6, p, ol, ul {
+    margin: 0;
+    padding: 0;
+    font-weight: normal;
   }
 
-  /* Removes spacing between cells in tables */
-  table {
-    border-collapse: collapse;
-  }
-
-  /* Revert the 'white-space' property for textarea elements on Safari */
-  textarea {
-    white-space: revert;
-  }
   :root {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
       Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
@@ -69,7 +54,7 @@
   }
 
   :global(.contrast) {
-    filter: saturate(0) grayscale(1) brightness(0.7) contrast(1000%) invert(1);
+    color: var(--cme-color);
   }
 
   .full {
@@ -78,11 +63,17 @@
     display: grid;
     place-items: center;
   }
+  button {
+    border: 0;
+    background: 0;
+    font-weight: semibold;
+    font-size: 1rem;
+    padding: 0;
+    cursor: pointer;
+  }
 
-  input {
-    background: white;
-    border-radius: 3px;
-    font-size: 1.5rem;
-    padding: 0.75rem 1.25rem 1rem 1.25rem;
+  button:disabled {
+    cursor: default;
+    pointer-events: none;
   }
 </style>
