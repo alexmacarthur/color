@@ -16,3 +16,8 @@
   from = "/api/event"
   to = "https://analytics.macarthur.me/api/event"
   status = 202
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
