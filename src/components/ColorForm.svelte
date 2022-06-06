@@ -20,7 +20,8 @@
     e.target["reset"]();
 
     sendEvent("submit_color", {
-      value: colorInputValue,
+      value: colorValue.value,
+      isValid: colorValue.isValid
     });
   }}
 >
