@@ -1,6 +1,6 @@
 <script lang="ts">
+  import { sendEvent } from "../lib/utils";
   import { getColor } from "../lib/colors";
-
   import { color } from "../store";
 
   let colorInputValue = "";
@@ -16,6 +16,10 @@
     color.set(colorValue);
 
     window.history.pushState({}, "", `/${colorValue.value}`);
+
+    sendEvent("submit_color", {
+      value: colorInputValue,
+    });
   }}
 >
   <h3 class="contrast">Enter a color value.</h3>

@@ -1,11 +1,18 @@
 <script lang="ts">
+  import { sendEvent } from "../lib/utils";
+
   let hasBeenClicked: boolean = false;
   $: buttonText = hasBeenClicked ? "Copied" : "Copy Link";
   $: buttonIcon = hasBeenClicked ? "👍" : "💾";
 
   let copyLink = () => {
-    navigator.clipboard.writeText(window.location.href);
+    let currentUrl = window.location.href;
+    navigator.clipboard.writeText(currentUrl);
     hasBeenClicked = true;
+
+    sendEvent("copy_link", {
+      link: currentUrl
+    });
   };
 </script>
 

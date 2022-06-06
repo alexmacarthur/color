@@ -20,6 +20,7 @@
     "vite": "^2.9.9"
   },
   "dependencies": {
-    "invert-color": "^2.0.0"
+    "invert-color": "^2.0.0",
+    "request-animation-helpers": "^0.1.0"
   }
 }

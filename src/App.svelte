@@ -2,29 +2,15 @@
   import { getColor } from "./lib/colors";
   import { color as colorStore } from "./store";
   import Screen from "./components/Screen.svelte";
-  import ColorForm from "./components/ColorForm.svelte";
-import { onMount } from "svelte";
-  let element;
-
   const pathColor = getColor();
 
   if (pathColor.value) {
     $colorStore = pathColor;
   }
-
-  colorStore.subscribe(value => {
-
-    // element.style.setProperty('--cme-color', value.value);
-    // console.log('value', value);
-  })
 </script>
 
-<main class="full" bind:this={element}>
-  {#if $colorStore.value}
-    <Screen />
-  {:else}
-    <ColorForm />
-  {/if}
+<main class="full">
+  <Screen />
 </main>
 
 <style global>
@@ -46,6 +32,7 @@ import { onMount } from "svelte";
   :root {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
       Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    --cme-color: black;
   }
 
   :global(body) {
@@ -64,16 +51,18 @@ import { onMount } from "svelte";
     place-items: center;
   }
   button {
-    border: 0;
     background: 0;
     font-weight: semibold;
     font-size: 1rem;
-    padding: 0;
+    padding: .25rem .5rem;
+    border-radius: 50px;
     cursor: pointer;
+    border: 2px solid var(--cme-color);
   }
 
   button:disabled {
     cursor: default;
     pointer-events: none;
+    border-color: rgba(0, 0, 0, 0);
   }
 </style>
