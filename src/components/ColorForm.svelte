@@ -34,7 +34,7 @@
     <input
       type="text"
       bind:value={colorInputValue}
-      placeholder={$color.value}
+      placeholder={$color.value || "dodgerblue"}
     />
 
     <button type="submit">See It</button>
@@ -80,6 +80,7 @@
     border: 2px solid var(--cme-contrast-color);
     border-radius: 3px;
     background: var(--cme-original-color);
+    color: var(--cme-contrast-color);
     font-size: 1.5rem;
     font-weight: normal;
     padding: 0.75rem 1.25rem 1rem 1.25rem;
