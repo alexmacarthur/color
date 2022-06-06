@@ -87,7 +87,7 @@
   }
 
   .label {
-    font-size: clamp(3rem, 10vw, 6rem);
+    font-size: clamp(3rem, 10vw, 5rem);
     font-weight: bold;
     display: block;
     margin-bottom: 0.25rem;
