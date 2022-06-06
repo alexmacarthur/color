@@ -1,0 +1,18 @@
+[build]
+  publish = "dist"
+  command = "npm run build"
+  node_bundler = "esbuild"
+
+[build.environment]
+  NODE_VERSION = "v17.5.0"
+  NPM_VERSION = "v8.4.1"
+
+[[redirects]]
+  from = "/js/numbers.js"
+  to = "https://analytics.macarthur.me/js/plausible.js"
+  status = 200
+
+[[redirects]]
+  from = "/api/event"
+  to = "https://analytics.macarthur.me/api/event"
+  status = 202
