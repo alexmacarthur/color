@@ -28,9 +28,7 @@
     Any valid color in CSS is allowed -- RGB, HSL, hexadecimal, whatever.
   </span>
 
-  <div class="input-wrapper">
-    <input type="text" bind:value={colorInputValue} placeholder="dodgerblue" />
-  </div>
+  <input type="text" bind:value={colorInputValue} placeholder="dodgerblue" />
 </form>
 
 <style>
@@ -55,40 +53,16 @@
   }
 
   input {
-    border: none;
+    border: 2px solid var(--cme-color);
     border-radius: 3px;
     background: white;
     font-size: 1.5rem;
     padding: 0.75rem 1.25rem 1rem 1.25rem;
+    box-shadow: 4px 4px var(--cme-color);
+  }
+
+  input:focus {
+    outline: var(--cme-color);
     box-shadow: none;
-  }
-
-  .input-wrapper {
-    position: relative;
-    display: grid;
-    place-items: center;
-  }
-
-  .input-wrapper:after {
-    content: "";
-    opacity: 0.6;
-    border-radius: 3px;
-    border: 2px solid var(--cme-color);
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-  }
-
-  .input-wrapper input {
-    position: relative;
-    z-index: 1;
-    width: calc(100% - 4px);
-    height: calc(100% - 4px);
-  }
-
-  .input-wrapper:has(input:focus) {
-    display: none;
   }
 </style>

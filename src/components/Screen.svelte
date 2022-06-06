@@ -4,51 +4,85 @@
   import { color } from "../store";
   import ColorForm from "./ColorForm.svelte";
   import CopyButton from "./CopyButton.svelte";
-  import { afterFuturePaint } from "request-animation-helpers";
 
   let element;
-  $: colorValue = $color.value;
+  $: colorValue = $color.isValid ? $color.value : "white";
 
   const updateContrastingColor = () => {
-    let contrastedColor = getContrastingColor(window.getComputedStyle(element).backgroundColor);
+    let contrastedColor = getContrastingColor(
+      window.getComputedStyle(element).backgroundColor
+    );
 
-    element.style.setProperty('--cme-color', contrastedColor);
-  }
+    element.style.setProperty("--cme-color", contrastedColor);
+  };
 
   onMount(() => {
-    if(!colorValue) return;
+    if (!colorValue) return;
 
     updateContrastingColor();
   });
 
   color.subscribe(() => {
-    if(!element) return;
+    if (!element) return;
 
-    afterFuturePaint(updateContrastingColor());
-  })
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        updateContrastingColor();
+      });
+    });
+  });
 </script>
 
-<div class="full" style="background-color: {colorValue}" bind:this={element}>
+<div
+  class="full screen"
+  style="background-color: {colorValue}"
+  bind:this={element}
+>
   <div class="label-wrapper">
     <span class="label contrast">
-      {colorValue || "Share a color."}
+      {#if $color.value && !$color.isValid}
+        {$color.value}
+
+        <span class="sub-label"> ...isn't a valid color. Try again! </span>
+      {:else}
+        {$color.value || "Share a color."}
+      {/if}
     </span>
 
-    <CopyButton />
+    {#if $color.isValid}
+      <CopyButton />
+    {/if}
   </div>
-
   <ColorForm />
 </div>
 
 <style>
+  .screen {
+    padding: 1rem 1rem;
+  }
+
+  @media screen and (min-width: 700px) {
+    .screen {
+      padding: 1rem 2rem;
+    }
+  }
+
   .label {
-    font-size: 10vw;
+    font-size: clamp(3rem, 10vw, 6rem);
     font-weight: bold;
     display: block;
-    margin-bottom: .25rem;
+    margin-bottom: 0.25rem;
+    line-height: 1.2;
+  }
+
+  .sub-label {
+    font-size: 2rem;
+    display: block;
+    font-weight: 400;
   }
 
   .label-wrapper {
     text-align: center;
+    max-width: 800px;
   }
 </style>

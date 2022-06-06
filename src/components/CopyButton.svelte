@@ -2,8 +2,7 @@
   import { sendEvent } from "../lib/utils";
 
   let hasBeenClicked: boolean = false;
-  $: buttonText = hasBeenClicked ? "Copied" : "Copy Link";
-  $: buttonIcon = hasBeenClicked ? "👍" : "💾";
+  $: buttonText = hasBeenClicked ? "Copied!" : "Copy Link";
 
   let copyLink = () => {
     let currentUrl = window.location.href;
@@ -18,5 +17,4 @@
 
 <button on:click={copyLink} disabled={hasBeenClicked}>
   <span class="contrast">{buttonText}</span>
-  {buttonIcon}
 </button>
