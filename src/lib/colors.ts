@@ -20,6 +20,10 @@ export const getContrastingColor = (rgbaValue: string) => {
   return invert([r, g, b] as any, true);
 };
 
+export const invertHex = (hexCode: string) => {
+  return invert(hexCode);
+};
+
 export const getColor = (givenValue: string = ""): Color => {
   let color = givenValue || getPathValue() || getHashValue();
 

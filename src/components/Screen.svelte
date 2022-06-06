@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { getContrastingColor } from "../lib/colors";
+  import { getContrastingColor, invertHex } from "../lib/colors";
   import { onMount } from "svelte";
   import { color } from "../store";
   import ColorForm from "./ColorForm.svelte";
@@ -9,11 +9,11 @@
   $: colorValue = $color.isValid ? $color.value : "white";
 
   const updateContrastingColor = () => {
-    let contrastedColor = getContrastingColor(
-      window.getComputedStyle(element).backgroundColor
-    );
+    let originalColor = window.getComputedStyle(element).backgroundColor;
+    let contrastedColor = getContrastingColor(originalColor);
 
-    element.style.setProperty("--cme-color", contrastedColor);
+    element.style.setProperty("--cme-contrast-color", contrastedColor);
+    element.style.setProperty("--cme-original-color", originalColor);
   };
 
   onMount(() => {
@@ -39,7 +39,7 @@
   bind:this={element}
 >
   <div class="label-wrapper">
-    <span class="label contrast">
+    <span class="label">
       {#if $color.value && !$color.isValid}
         {$color.value}
 
@@ -54,6 +54,10 @@
     {/if}
   </div>
   <ColorForm />
+
+  <div class="creator">
+    created by <a href="https://macarthur.me" target="_blank">Alex MacArthur</a>
+  </div>
 </div>
 
 <style>
@@ -65,6 +69,21 @@
     .screen {
       padding: 1rem 2rem;
     }
+  }
+
+  .creator {
+    text-align: center;
+    color: var(--cme-contrast-color);
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 1rem;
+    font-size: 0.85rem;
+    opacity: var(--cme-fade-opacity);
+  }
+
+  .creator a {
+    color: inherit;
   }
 
   .label {

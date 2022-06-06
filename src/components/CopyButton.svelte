@@ -10,11 +10,11 @@
     hasBeenClicked = true;
 
     sendEvent("copy_link", {
-      link: currentUrl
+      link: currentUrl,
     });
   };
 </script>
 
 <button on:click={copyLink} disabled={hasBeenClicked}>
-  <span class="contrast">{buttonText}</span>
+  <span>{buttonText}</span>
 </button>

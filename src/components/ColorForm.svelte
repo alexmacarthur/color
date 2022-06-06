@@ -17,18 +17,28 @@
 
     window.history.pushState({}, "", `/${colorValue.value}`);
 
+    e.target["reset"]();
+
     sendEvent("submit_color", {
       value: colorInputValue,
     });
   }}
 >
-  <h3 class="contrast">Enter a color value.</h3>
+  <h3>Enter a color value.</h3>
 
-  <span class="contrast">
+  <span>
     Any valid color in CSS is allowed -- RGB, HSL, hexadecimal, whatever.
   </span>
 
-  <input type="text" bind:value={colorInputValue} placeholder="dodgerblue" />
+  <div class="input-wrapper">
+    <input
+      type="text"
+      bind:value={colorInputValue}
+      placeholder={$color.value}
+    />
+
+    <button type="submit">See It</button>
+  </div>
 </form>
 
 <style>
@@ -42,9 +52,10 @@
 
   span {
     display: inline-block;
+    text-align: center;
     margin-bottom: 1.5rem;
     font-size: 0.9rem;
-    opacity: 0.6;
+    opacity: var(--cme-fade-opacity);
   }
 
   form {
@@ -52,17 +63,43 @@
     flex-direction: column;
   }
 
+  .input-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  @media screen and (min-width: 400px) {
+    .input-wrapper {
+      flex-direction: row;
+    }
+  }
+
   input {
-    border: 2px solid var(--cme-color);
+    flex: 1;
+    border: 2px solid var(--cme-contrast-color);
     border-radius: 3px;
-    background: white;
+    background: var(--cme-original-color);
     font-size: 1.5rem;
+    font-weight: normal;
     padding: 0.75rem 1.25rem 1rem 1.25rem;
-    box-shadow: 4px 4px var(--cme-color);
+    box-shadow: 4px 4px var(--cme-contrast-color);
   }
 
   input:focus {
-    outline: var(--cme-color);
+    outline: var(--cme-contrast-color);
     box-shadow: none;
+  }
+
+  ::-webkit-input-placeholder {
+    color: var(--cme-contrast-color);
+    opacity: 0.4;
+  }
+  ::placeholder {
+    color: var(--cme-contrast-color);
+    opacity: 0.4;
+  }
+  button {
+    border-radius: 3px;
   }
 </style>

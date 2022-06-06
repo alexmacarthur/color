@@ -43,23 +43,27 @@
   :root {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
       Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-    --cme-color: black;
+    --cme-contrast-color: black;
+    --cme-original-color: white;
+    --cme-fade-opacity: .6;
   }
 
-  :global(body) {
+  body {
     padding: 0;
     margin: 0;
   }
 
-  :global(.contrast) {
-    color: var(--cme-color);
+  * {
+    color: var(--cme-contrast-color);
   }
 
   .full {
     height: 100vh;
     width: 100%;
-    display: grid;
-    place-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
   }
   button {
     background: 0;
@@ -68,12 +72,18 @@
     padding: 0.5rem 0.75rem;
     border-radius: 50px;
     cursor: pointer;
-    border: 2px solid var(--cme-color);
+    border: 2px solid var(--cme-contrast-color);
+    box-shadow: 4px 4px var(--cme-contrast-color);
+  }
+
+  button:hover {
+    box-shadow: none;
   }
 
   button:disabled {
     cursor: default;
     pointer-events: none;
     border-color: rgba(0, 0, 0, 0);
+    box-shadow: none;
   }
 </style>
