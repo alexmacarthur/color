@@ -92,6 +92,7 @@
     display: block;
     margin-bottom: 0.25rem;
     line-height: 1.2;
+    word-break: break-all;
   }
 
   .sub-label {
