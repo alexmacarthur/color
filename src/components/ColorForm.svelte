@@ -62,6 +62,7 @@
   form {
     display: flex;
     flex-direction: column;
+    max-width: 100%;
   }
 
   .input-wrapper {

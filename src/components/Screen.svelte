@@ -38,22 +38,27 @@
   style="background-color: {colorValue}"
   bind:this={element}
 >
-  <div class="label-wrapper">
-    <span class="label">
-      {#if $color.value && !$color.isValid}
-        {$color.value}
+  <div class="inner-wrapper full">
+    <div class="label-wrapper">
+      <span class="label">
+        {#if $color.value && !$color.isValid}
+          {$color.value}
 
-        <span class="sub-label"> ...isn't a valid color. Try again! </span>
-      {:else}
-        {$color.value || "Share a color."}
+          <span class="sub-label"> ...isn't a valid color. Try again! </span>
+        {:else}
+          {$color.value || "Share a color."}
+        {/if}
+      </span>
+
+      {#if $color.isValid}
+        <div class="button-wrapper">
+          <CopyButton />
+        </div>
       {/if}
-    </span>
+    </div>
 
-    {#if $color.isValid}
-      <CopyButton />
-    {/if}
+    <ColorForm />
   </div>
-  <ColorForm />
 
   <div class="creator">
     created by <a href="https://macarthur.me" target="_blank">Alex MacArthur</a>
@@ -74,11 +79,7 @@
   .creator {
     text-align: center;
     color: var(--cme-contrast-color);
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    bottom: 1rem;
-    font-size: 0.85rem;
+    padding-top: .75rem;
     opacity: var(--cme-fade-opacity);
   }
 
@@ -87,12 +88,15 @@
   }
 
   .label {
-    font-size: clamp(3rem, 10vw, 5rem);
+    font-size: clamp(2.75rem, 10vw, 5rem);
     font-weight: bold;
     display: block;
-    margin-bottom: 0.25rem;
     line-height: 1.2;
     word-break: break-all;
+  }
+
+  .button-wrapper {
+    padding-top: 1rem;
   }
 
   .sub-label {
