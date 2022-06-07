@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { color } from "../store";
+
   import { sendEvent } from "../lib/utils";
 
   let hasBeenClicked: boolean = false;
@@ -13,6 +15,11 @@
       link: currentUrl,
     });
   };
+
+  // Reset button after the color changes.
+  color.subscribe(() => {
+    hasBeenClicked = false;
+  });
 </script>
 
 <button on:click={copyLink} disabled={hasBeenClicked}>
