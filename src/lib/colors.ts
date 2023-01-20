@@ -2,7 +2,7 @@ import invert from "invert-color";
 import type { Color } from "src/types";
 
 const getPathValue = (): string => {
-  let value = window.location.pathname.replace(/^\//, "");
+  let value = window.location.pathname.replace(/^\/(color\/)?/, "");
 
   return decodeURI(value);
 };
