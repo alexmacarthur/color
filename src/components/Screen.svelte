@@ -79,7 +79,7 @@
   .creator {
     text-align: center;
     color: var(--cme-contrast-color);
-    padding-top: .75rem;
+    padding-top: 0.75rem;
     opacity: var(--cme-fade-opacity);
   }
 

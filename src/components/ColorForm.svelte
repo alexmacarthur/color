@@ -21,7 +21,7 @@
 
     sendEvent("submit_color", {
       value: colorValue.value,
-      isValid: colorValue.isValid
+      isValid: colorValue.isValid,
     });
   }}
 >
