@@ -15,7 +15,7 @@
 
     color.set(colorValue);
 
-    window.history.pushState({}, "", `/${colorValue.value}`);
+    window.history.pushState({}, "", `/color/${colorValue.value}`);
 
     e.target["reset"]();
 
