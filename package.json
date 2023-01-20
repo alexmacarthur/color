@@ -4,8 +4,8 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build --base=https://color.macarthur.me/",
+    "start": "vite",
+    "build": "vite build --base=https://color-macarthur-me.netlify.app/",
     "preview": "vite preview",
     "check": "svelte-check --tsconfig ./tsconfig.json",
     "format": "prettier ./src/**/*.{ts,svelte} --write"

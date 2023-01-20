@@ -1,11 +1,11 @@
 <script lang="ts">
-  import { getContrastingColor, invertHex } from "../lib/colors";
+  import { getContrastingColor } from "../lib/colors";
   import { onMount } from "svelte";
   import { color } from "../store";
   import ColorForm from "./ColorForm.svelte";
   import CopyButton from "./CopyButton.svelte";
 
-  let element;
+  let element: HTMLElement;
   $: colorValue = $color.isValid ? $color.value : "white";
 
   const updateContrastingColor = () => {
@@ -61,7 +61,9 @@
   </div>
 
   <div class="creator">
-    created by <a href="https://macarthur.me" target="_blank">Alex MacArthur</a>
+    created by <a href="https://macarthur.me" rel="noreferrer" target="_blank"
+      >Alex MacArthur</a
+    >
   </div>
 </div>
 
